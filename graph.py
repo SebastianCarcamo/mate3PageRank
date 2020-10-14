@@ -4,6 +4,7 @@ import string
 from csv import reader
 from networkx.drawing.nx_agraph import graphviz_layout
 import os
+from matplotlib.pyplot import figure, text
 
 letters = string.ascii_lowercase
 
@@ -49,10 +50,13 @@ G.add_nodes_from(names)
 G.add_edges_from(edges)
 
 pos = nx.spring_layout(G)
-nx.draw(G,pos, node_size = v, with_labels=True, arrowsize = 15)
+nx.draw(G,pos, node_size = v, arrowsize = 25)
+
+for node, (x, y) in pos.items():
+    text(x, y, node, fontsize=40, ha='center', va='center')
 
 figure = plt.gcf()
-figure.set_size_inches(18,14)
+figure.set_size_inches(25,20)
 
 name = name[:-4]
 plt.savefig('./imgs/' + name + '.png', transparent = True)
